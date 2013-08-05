@@ -55,7 +55,7 @@ insert into Requirements (name, level, definition, linkName, type, range, catego
 ('license costs charged by providers', 3, 'Description Missing', 'accountability.ownership.licenseCostsChargedByProviders', 'select', '0:no licensing via provider available, 5:more expensive then direct licensing contracts, 8:same costs as direct licensing contracts, 10:cheaper than direct licensing contracts', 'accountability', 'ownership');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-('providers financial stabiity', 3, 'Description Missing', 'accountability.providerBusinessStability.providerBusinessStability', 'select', '0:chapter 11 expected, 1:unstable company - insolvency possible, 5:standard stable company - insolvency not expected, 10:very stable company - insolvency rulled out', 'accountability', 'providerBusinessStability');''''
+('providers financial stabiity', 3, 'Description Missing', 'accountability.providerBusinessStability.providerBusinessStability', 'select', '0:chapter 11 expected, 1:unstable company - insolvency possible, 5:standard stable company - insolvency not expected, 10:very stable company - insolvency rulled out', 'accountability', 'providerBusinessStability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
 ('information security certificates', 3, 'Description Missing', 'accountability.providerCertifications.informationSecurityCertificates', 'select', '0:none, 5:ISO20000, 10:ISO27000-PCI', 'accountability', 'providerCertifications');
@@ -73,40 +73,35 @@ insert into Requirements (name, level, definition, linkName, type, range, catego
 ('relation database replication', 3, 'Description Missing', 'agility.portability.relationDatabaseReplication', 'radio', '0:none, 10:available', 'agility', 'portability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('block storage snapshot', 3, 'Description Missing', 'agility.portability.blockStoageSnapshot', 'select', '0:none, 5:available, 10:available and automatically transferred to secondary storage', 'agility', 'portability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('noSQL database sharding', 3, 'Description Missing', 'agility.scalability.nosqlDatabaseSharding', 'select', '0:none, 3:definable on setup, 6:adaptable, 10:self-adapting', 'agility', 'scalability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('message queue service', 3, 'Description Missing', 'agility.scalability.messageQueueService', 'select', '0:none, 1:proprietary message queue service, 5:JMS compatible message queue service, 10:AQMP compatible distributed and replicated message queue service', 'agility', 'scalability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('java web container PaaS scaling', 3, 'Description Missing', 'agility.scaling.javaWebContainerPaasScaling', 'select', '0:none, 1:basic JEE web container, 3:load balanced JEE container, 6:load balanced and clustered JEE web container', 'agility', 'scalability');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('CAPEX', 3, 'Description Missing', 'financial.billingProcess.capex', 'select', '0:very high CAPEX (>=20000EUR), 2:high CAPEX (<20000EUR), 5:medium CAPEX (<10000EUR), 8:minor CAPEX (<5000EUR), 10:none (0EUR)', 'financial', 'billingProcess');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
-
-insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
-
+('CAPEX for long term scaleup', 3, 'Description Missing', 'financial.billingProcess.capexForLongTermScaleup', 'select', '0:very high CAPEX (>=20000EUR), 2:high CAPEX (<20000EUR), 5:medium CAPEX (<10000EUR), 8:minor CAPEX (<5000EUR), 10:none (0EUR)', 'financial', 'billingProcess');
 
 insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
+('running charges for deactivation', 3, 'Description Missing', 'financial.cost.runningChargesForDeactivation', 'select', '0:same charges as for active elements, 5:reduced charges, 10:none', 'financial', 'cost');
+
+insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
+('running charges for data transfer', 3, 'Description Missing', 'financial.cost.runningChargesForDataTransfer', 'slider', 'max:10c/GB, min:0c/GB', 'financial', 'cost');
+
+insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
+('minimum contract commitment', 3, 'Description Missing', 'financial.financialAgility.minimumContractCommitment', 'input', '', 'financial', 'financialAgility');
+
+insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
+('online cost control', 3, 'Description Missing', 'financial.financialStructure.onlineCostControl', 'radio', '0:no, 1:yes', 'financial', 'financialStructure');
+
+insert into Requirements (name, level, definition, linkName, type, range, category, subcategory) values 
+('management API', 3, 'Description Missing', 'performance.functionality.managementApi', 'select', '0:not available, 4:basic, 7:sophisticated, 10:sophisticated and easy to integrate', 'performance', 'functionality');
 
