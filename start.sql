@@ -1,4 +1,4 @@
-CONNECT remote:localhost/tests admin admin;
+CONNECT remote:localhost/functional admin admin;
 
 DECLARE INTENT massiveinsert;
 
