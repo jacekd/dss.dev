@@ -5,8 +5,13 @@
   <title>DSS</title>
   <link rel="stylesheet" href="css/foundation.min.css" />
 </head>
-<body ng-controller="catchRequirements">
-  <script src="js/angular.min.js"></script>
+<body ng-controller="firstLevelRequirements">
+  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <ul>
+    <li ng-repeat="requirement in requirements">{{ requirement.name }}</li>
+  </ul>
+  <script src="http://localhost:2480/js/orientdb-api.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
