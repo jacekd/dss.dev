@@ -33,7 +33,19 @@ dssApp.factory('catchRequirementsFactory', function (){
   return methods;
 });
 
-// test controller
-dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
+// objectCreate factory
+dssApp.factory('createObject', function(object) {
+  if (object.type === "slider") {
+    return "This is slider";
+  }
+});
+
+// first Level Requirements controller
+dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory, createObject) {
   $scope.requirements = catchRequirementsFactory.getFirstLevelRequirements();
+});
+
+// thirdLevelRequirements controller
+dssApp.controller('thirdLevelRequirements', function($scope, catchRequirementsFactory) {
+  $scope.requirements = catchRequirementsFactory.getThirdLevelRequirements();
 });
