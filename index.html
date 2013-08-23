@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>DSS</title>
-  <link rel="stylesheet" href="css/foundation.min.css" />
+  <link rel="stylesheet" href="lib/css/foundation.min.css" />
+  <link rel="stylesheet" href="src/css/main.css" />
+  <script src="lib/js/custom.modernizr.js"></script>
 </head>
 <body ng-controller="firstLevelRequirements">
-  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   <ul>
     <li ng-repeat="requirement in requirements">{{ requirement.name }}</li>
   </ul>
+  <script src="lib/js/jquery.js"></script>
+  <script src="lib/js/angular.min.js"></script>
   <script src="http://localhost:2480/js/orientdb-api.js"></script>
-  <script src="js/main.js"></script>
+  <script src="src/js/main.js"></script>
 </body>
 </html>
