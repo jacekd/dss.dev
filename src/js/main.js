@@ -41,8 +41,13 @@ dssApp.factory('createObject', function(object) {
 });
 
 // first Level Requirements controller
-dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory, createObject) {
-  $scope.requirements = catchRequirementsFactory.getFirstLevelRequirements();
+dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
+  requirementsData = catchRequirementsFactory.getFirstLevelRequirements();
+  var requirements = "";
+  $.each(requirementsData, function(i, item) {
+    requirements = requirements + requirementsData[i].name + "<br>";
+  });
+  $scope.requirements = requirements;
 });
 
 // thirdLevelRequirements controller
