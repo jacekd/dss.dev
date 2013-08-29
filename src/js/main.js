@@ -45,7 +45,16 @@ dssApp.directive('slider', function() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      $(element).noUiSlider(scope.$eval("{" + attrs.slider + "}"));
+      // $(element).noUiSlider(scope.$eval("{" + attrs.slider + "}"));
+      element.noUiSlider({
+        range: [0, 100],
+        start: 20,
+        step: 10,
+        handles: 1,
+        slide: function() {
+          $(this).parent().find("span").text($(this).val());
+        }
+      });
     }
   };
 });
