@@ -60,6 +60,9 @@ dssApp.filter('capitalize', function() {
 // first Level Requirements controller
 dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
   $scope.requirements = catchRequirementsFactory.getFirstLevelRequirements();
+  $scope.updateSpan = function(val) {
+      $("span").text(val);
+    }
 });
 
 // thirdLevelRequirements controller

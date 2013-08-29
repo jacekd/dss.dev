@@ -52,7 +52,7 @@
 }
 	.noUiSlider {
 		border: 1px solid #908d84;
-		border-radius: 3px;
+/*		border-radius: 3px; */
 	}
 	.noUiSlider.connect a,
 	.noUiSlider.connect.lower {
@@ -61,7 +61,7 @@
 	.noUiSlider,
 	.noUiSlider.connect.lower a {
 		background: #d9d7cb;
-		box-shadow: inset 0px 1px 7px #b6b4a8
+		/* box-shadow: inset 0px 1px 7px #b6b4a8 */
 	}
 	.noUiSlider.disabled,
 	.noUiSlider.disabled.connect.lower a {

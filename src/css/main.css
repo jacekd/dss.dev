@@ -22,6 +22,11 @@ html, body {
 
 .firstLevelRequirements {
   border-right: 1px solid #dedede;
+  margin-top: 15px;
+}
+
+.firstLevelRequirements a:hover {
+  text-decoration: underline;
 }
 
 .subRequirements {
