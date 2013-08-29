@@ -33,26 +33,19 @@ dssApp.factory('catchRequirementsFactory', function (){
   return methods;
 });
 
-// objectCreate factory
-dssApp.factory('createObject', function(object) {
-  if (object.type === "slider") {
-    return "This is slider";
-  }
-});
-
 // Directives 
 dssApp.directive('slider', function() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      // $(element).noUiSlider(scope.$eval("{" + attrs.slider + "}"));
+      attributes = scope.$eval("{" + attrs.slider + "}");
       element.noUiSlider({
-        range: [0, 100],
-        start: 20,
-        step: 10,
-        handles: 1,
+        range: attributes.range===null||attributes.range===undefined ? [0,100] : attributes.range,
+        start: attributes.start===null||attributes.start===undefined ? 0 : attributes.start,
+        step: attributes.step===null||attributes.start===undefined ? 1 : attributes.step,
+        handles: attributes.handles===null||attributes.handles===undefined ? 1 : attributes.handles,
         slide: function() {
-          $(this).parent().find("span").text($(this).val());
+          $(this).prev("span.requirementValue").text($(this).val());
         }
       });
     }
