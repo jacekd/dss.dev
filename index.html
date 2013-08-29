@@ -23,7 +23,7 @@
         <label class="right"><a href="#">Details &raquo;</a></label>
         <label style="margin-bottom: 5px;">{{ requirement.name | capitalize }}</label>
         <span class="label secondary radius right requirementValue">-</span>
-        <div id="{{ requirement.name }}" slider="range: [0, 100], step: 10, handles: 1, start: 20" style="width: 90%; margin-top: 10px;" class="noUiSlider"></div>
+        <div id="{{ requirement.name }}" slider="{{ requirement.attributes }}" style="width: 90%; margin-top: 10px;" class="noUiSlider"></div>
         <br>
       </div>
     </div>

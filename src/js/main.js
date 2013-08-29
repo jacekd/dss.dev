@@ -38,15 +38,18 @@ dssApp.directive('slider', function() {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      attributes = scope.$eval("{" + attrs.slider + "}");
-      element.noUiSlider({
-        range: attributes.range===null||attributes.range===undefined ? [0,100] : attributes.range,
-        start: attributes.start===null||attributes.start===undefined ? 0 : attributes.start,
-        step: attributes.step===null||attributes.start===undefined ? 1 : attributes.step,
-        handles: attributes.handles===null||attributes.handles===undefined ? 1 : attributes.handles,
-        slide: function() {
-          $(this).prev("span.requirementValue").text($(this).val());
-        }
+      attrs.$observe('slider', function(value) {
+        var attributes = scope.$eval("{" + attrs.slider + "}");
+
+        element.noUiSlider({
+          range: attributes.range===null||attributes.range===undefined ? [0,100] : attributes.range,
+          start: attributes.start===null||attributes.start===undefined ? 0 : attributes.start,
+          step: attributes.step===null||attributes.start===undefined ? 1 : attributes.step,
+          handles: attributes.handles===null||attributes.handles===undefined ? 1 : attributes.handles,
+          slide: function() {
+            $(this).prev("span.requirementValue").text($(this).val());
+          }
+        });
       });
     }
   };

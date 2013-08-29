@@ -1,3 +1,3 @@
-connect remote:localhost/tests admin admin;
+connect remote:localhost/functional admin admin;
 
 drop class Requirements;
