@@ -40,14 +40,26 @@ dssApp.factory('createObject', function(object) {
   }
 });
 
+// Directives 
+dssApp.directive('slider', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      $(element).noUiSlider(scope.$eval("{" + attrs.slider + "}"));
+    }
+  };
+});
+
+// Filters
+dssApp.filter('capitalize', function() {
+  return function(input, scope) {
+    return input.substring(0,1).toUpperCase()+input.substring(1);
+  }
+});
+
 // first Level Requirements controller
 dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
-  requirementsData = catchRequirementsFactory.getFirstLevelRequirements();
-  var requirements = "";
-  $.each(requirementsData, function(i, item) {
-    requirements = requirements + requirementsData[i].name + "<br>";
-  });
-  $scope.requirements = requirements;
+  $scope.requirements = catchRequirementsFactory.getFirstLevelRequirements();
 });
 
 // thirdLevelRequirements controller
