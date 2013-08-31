@@ -12,7 +12,7 @@ dssApp.factory('catchRequirementsFactory', function (){
       functionalDatabaseInfo = functionalDatabase.open('admin', 'admin');
 
   methods.getAll = function () {
-    query = functionalDatabase.query('select from Requirements');
+    query = functionalDatabase.query('select from Requirements limit 1000');
 
     return query.result;
   }
@@ -23,8 +23,8 @@ dssApp.factory('catchRequirementsFactory', function (){
     return query.result;
   }
 
-  methods.getThirdLevelRequirements = function () {
-    query = functionalDatabase.query('select from Requirements where level = 3');
+  methods.getThirdLevelRequirements = function (category) {
+    query = functionalDatabase.query('select from Requirements where level = 3 and category = "' + category + '"');
 
     return query.result;
   }
@@ -64,10 +64,11 @@ dssApp.filter('capitalize', function() {
 
 // first Level Requirements controller
 dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
-  $scope.requirements = catchRequirementsFactory.getFirstLevelRequirements();
-  $scope.updateSpan = function(val) {
-      $("span").text(val);
-    }
+  // $scope.requirementsFirstLevel = catchRequirementsFactory.getFirstLevelRequirements();
+  $scope.filterCategory = {  };
+
+  $scope.requirements = catchRequirementsFactory.getAll();
+
 });
 
 // thirdLevelRequirements controller

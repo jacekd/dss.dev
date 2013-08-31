@@ -20,15 +20,20 @@ html, body {
   margin: 5px;
 }
 
+.container {
+  height: 100%;
+}
+
 .firstLevelRequirements {
   border-right: 1px solid #dedede;
-  margin-top: 15px;
+  padding-top: 15px;
+  height: 100%;
 }
 
 .firstLevelRequirements a:hover {
   text-decoration: underline;
 }
 
-.subRequirements {
-  display: none;
+.thirdLevelRequirements {
+  /* display: none; */
 }
