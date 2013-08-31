@@ -12,22 +12,22 @@ dssApp.factory('catchRequirementsFactory', function (){
       functionalDatabaseInfo = functionalDatabase.open('admin', 'admin');
 
   methods.getAll = function () {
-    query = functionalDatabase.query('select from Requirements limit 1000');
+    query = functionalDatabase.query('select from Requirements', 1000);
 
     return query.result;
   }
 
-  methods.getFirstLevelRequirements = function () {
-    query = functionalDatabase.query('select from Requirements where level = 1');
+  // methods.getFirstLevelRequirements = function () {
+  //   query = functionalDatabase.query('select from Requirements where level = 1');
 
-    return query.result;
-  }
+  //   return query.result;
+  // }
 
-  methods.getThirdLevelRequirements = function (category) {
-    query = functionalDatabase.query('select from Requirements where level = 3 and category = "' + category + '"');
+  // methods.getThirdLevelRequirements = function (category) {
+  //   query = functionalDatabase.query('select from Requirements where level = 3 and category = "' + category + '"');
 
-    return query.result;
-  }
+  //   return query.result;
+  // }
 
   functionalDatabase.close();
   return methods;
