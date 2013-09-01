@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>DSS</title>
   <link rel="stylesheet" href="lib/css/foundation.min.css" />
+  <link rel="stylesheet" href="lib/css/foundation-icons.css" />
   <link rel="stylesheet" href="lib/css/nouislider.fox.css" />
   <link rel="stylesheet" href="src/css/main.css" />
   <script src="lib/js/custom.modernizr.js"></script>
@@ -21,26 +22,32 @@
     <div ng-controller="requirements">
       <div class="large-4 columns firstLevelRequirements" >
         <div ng-repeat="requirement in requirements | filter: { level: 1 }">
-          <label class="right"><a ng-click="showSubcategory(requirement.name)">Details &raquo;</a></label>
-          <label style="margin-bottom: 5px;">{{ requirement.name | capitalize }}</label>
+          <label class="right"><a ng-click="showSubcategory((requirement.name | replaceSpacesWithDash).toLowerCase())">Details &raquo;</a></label>
+          <label style="margin-bottom: 5px;">{{ requirement.name | capitalize }} 
+            <span data-tooltip class="has-tip tip-top" title="{{ requirement.definition }}">
+              <i class="fi-lightbulb"></i>
+            </span>
+          </label>
           <span class="label secondary radius right requirementValue">-</span>
-          <div slider="{{ requirement.attributes }}" style="width: 90%; margin-top: 10px;" class="noUiSlider"></div>
+          <div slider="{{ requirement.attributes }}" style="width: 85%; margin-top: 10px;" class="noUiSlider"></div>
           <br>
         </div>
       </div>
       <div ng-repeat="requirement in requirements | filter: { level: 1 }">
-        <div class="thirdLevelRequirements" id="{{ requirement.name }}">
+        <div class="thirdLevelRequirements" id="{{ (requirement.name | replaceSpacesWithDash).toLowerCase() }}">
+          <p class="right"><i class="fi-x close" ng-click="closeSubcategory('thirdLevelRequirements')"></i></p>
           <p>{{ requirement.name | capitalize }}</p>
           <div class="row collapse">
             <div class="large-9 columns">
-              <form class="custom">
-              <select>
-                <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" value="{{ requirementThirdLevel.name }}">{{ requirementThirdLevel.name | capitalize }}</option>
+              <select class="thirdLevelRequirementsSelect">
+                <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" 
+                value="{{ requirementThirdLevel.name }}">
+                {{ requirementThirdLevel.name | capitalize }}
+                </option>
               </select>
             </div>
             <div class="large-3 columns">
-                <button class="button postfix">Add</button>
-              </form>
+                <button class="button postfix" ng-click="addElementToQuery()">Add</button>
             </div>
           </div>
         </div>

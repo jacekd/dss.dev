@@ -19,18 +19,6 @@ dssApp.factory('catchRequirementsFactory', function (){
     return query.result;
   }
 
-  // methods.getFirstLevelRequirements = function () {
-  //   query = functionalDatabase.query('select from Requirements where level = 1');
-
-  //   return query.result;
-  // }
-
-  // methods.getThirdLevelRequirements = function (category) {
-  //   query = functionalDatabase.query('select from Requirements where level = 3 and category = "' + category + '"');
-
-  //   return query.result;
-  // }
-
   functionalDatabase.close();
   return methods;
 });
@@ -64,6 +52,12 @@ dssApp.filter('capitalize', function() {
   }
 });
 
+dssApp.filter('replaceSpacesWithDash', function() {
+  return function(input, scope) {
+    return input.replace(/ /g,"_");
+  }
+});
+
 // first Level Requirements controller
 dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
   // $scope.requirementsFirstLevel = catchRequirementsFactory.getFirstLevelRequirements();
@@ -76,16 +70,19 @@ dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
     $(document).foundation();
 
     $(".thirdLevelRequirements").hide();
-    $("#" + categoryName).show();
+    $("#" + categoryName).fadeIn();
+  }
+
+  $scope.closeSubcategory = function(className) {
+    $("." + className).fadeOut();
+
+  $scope.addElementToQuery = function() {
+    var requirementName = $(this).parent().parent().find("select").val();
+    console.log($(this));
+  }
   }
 
   // Initialize foundation
   $(document).foundation();
 });
-
-// thirdLevelRequirements controller
-dssApp.controller('thirdLevelRequirements', function($scope, catchRequirementsFactory) {
-  $scope.requirements = catchRequirementsFactory.getThirdLevelRequirements();
-});
-
 
