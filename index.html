@@ -39,7 +39,7 @@
           <p>{{ requirement.name | capitalize }}</p>
           <div class="row collapse">
             <div class="large-9 columns">
-              <select class="thirdLevelRequirementsSelect">
+              <select class="thirdLevelRequirementsSelect {{ requirement.name }}">
                 <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" 
                 value="{{ requirementThirdLevel.name }}">
                 {{ requirementThirdLevel.name | capitalize }}
@@ -47,9 +47,14 @@
               </select>
             </div>
             <div class="large-3 columns">
-                <button class="button postfix" ng-click="addElementToQuery()">Add</button>
+                <button class="button postfix" ng-click="addElementToQuery(requirement.name)">Add</button>
             </div>
           </div>
+          <!-- start queries --> 
+          <div ng-repeat="item in queryElements | filter: { level: 3 } | filter:requirement.name">
+            <p>{{ item.name }}</p>
+          </div>
+          <!-- end queries -->
         </div>
       </div>
     </div>

@@ -61,7 +61,8 @@ dssApp.filter('replaceSpacesWithDash', function() {
 // first Level Requirements controller
 dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
   // $scope.requirementsFirstLevel = catchRequirementsFactory.getFirstLevelRequirements();
-  $scope.filterCategory = {  };
+  //
+  $scope.queryElements = [];
 
   $scope.requirements = catchRequirementsFactory.getAll();
 
@@ -75,11 +76,16 @@ dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
 
   $scope.closeSubcategory = function(className) {
     $("." + className).fadeOut();
-
-  $scope.addElementToQuery = function() {
-    var requirementName = $(this).parent().parent().find("select").val();
-    console.log($(this));
   }
+
+  $scope.addElementToQuery = function(categoryName) {
+    var requirementName = $("select." + categoryName).val();
+
+    angular.forEach($scope.requirements, function(requirement) {
+      if (requirement.category === categoryName && requirement.name === requirementName) {
+          if ($scope.queryElements.indexOf(requirement) == -1) $scope.queryElements.push(requirement);
+      }
+    });
   }
 
   // Initialize foundation
