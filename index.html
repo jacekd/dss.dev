@@ -29,7 +29,7 @@
             </span>
           </label>
           <span class="label secondary radius right requirementValue">-</span>
-          <div slider="{{ requirement.attributes }}" style="width: 85%; margin-top: 10px;" class="noUiSlider"></div>
+          <div render="{{ requirement.type }}" parameters="{{ requirement.attributes }}" style="width: 85%; margin-top: 10px;" class="noUiSlider"></div>
           <br>
         </div>
       </div>
@@ -47,12 +47,12 @@
               </select>
             </div>
             <div class="large-3 columns">
-                <button class="button postfix" ng-click="addElementToQuery(requirement.name)">Add</button>
+              <button class="button postfix" ng-click="addElementToQuery(requirement.name)">Add</button>
             </div>
           </div>
           <!-- start queries --> 
           <div ng-repeat="item in queryElements | filter: { level: 3 } | filter:requirement.name">
-            <p>{{ item.name }}</p>
+            <div render="{{ item.type }}" parameters="{{ item.attributes }}">{{ item.name }}</div>
           </div>
           <!-- end queries -->
         </div>

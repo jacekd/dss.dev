@@ -24,25 +24,50 @@ dssApp.factory('catchRequirementsFactory', function (){
 });
 
 // Directives 
-dssApp.directive('slider', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      attrs.$observe('slider', function(value) {
-        var attributes = scope.$eval("{" + attrs.slider + "}");
+dssApp.directive('render', function() {
+  return function (scope, element, attrs) {
+    attrs.$observe('parameters', function(value) {
+      var attributes = scope.$eval("{" + attrs.parameters + "}"),
+          renderValue = attrs.render;
+      if (renderValue === "slider") {
+        return {
+          restrict: 'A',
+          link: 
+            element.noUiSlider({
+              range: attributes.range===null||attributes.range===undefined ? [0,100] : attributes.range,
+              start: attributes.start===null||attributes.start===undefined ? 0 : attributes.start,
+              step: attributes.step===null||attributes.start===undefined ? 1 : attributes.step,
+              handles: attributes.handles===null||attributes.handles===undefined ? 1 : attributes.handles,
+              slide: function() {
+                $(this).prev("span.requirementValue").text($(this).val());
+              }
+            })
+        }
+      } else if (renderValue === "select") {
+        return {
+          restrict: 'E',
+          scope: {
+            render: '='
+          },
+          template: "<h5>there will be select here</h5>",
+          replace: true
+        }
+      } else if (renderValue === "input") {
+        return {
+          restrict: 'E',
+          template: '',
+          replace: true
+        }
+      } else if (renderValue === "checkbox") {
+        return {
+          restrict: 'E',
+          template: '',
+          replace: true
+        }
+      }
 
-        element.noUiSlider({
-          range: attributes.range===null||attributes.range===undefined ? [0,100] : attributes.range,
-          start: attributes.start===null||attributes.start===undefined ? 0 : attributes.start,
-          step: attributes.step===null||attributes.start===undefined ? 1 : attributes.step,
-          handles: attributes.handles===null||attributes.handles===undefined ? 1 : attributes.handles,
-          slide: function() {
-            $(this).prev("span.requirementValue").text($(this).val());
-          }
-        });
-      });
-    }
-  };
+    });
+  }
 });
 
 // Filters
