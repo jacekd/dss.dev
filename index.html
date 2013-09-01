@@ -17,22 +17,34 @@
     </div>
   </div>
 
-  <div class="row container" ng-controller="firstLevelRequirements">
-    <div class="large-4 columns firstLevelRequirements" >
-      <div ng-repeat="requirement in requirements | filter: { level: 1 }">
-        <label class="right"><a ng-click="filterCategory.category = requirement.name">Details &raquo;</a></label>
-        <label style="margin-bottom: 5px;">{{ requirement.name | capitalize }}</label>
-        <span class="label secondary radius right requirementValue">-</span>
-        <div id="{{ requirement.name }}" slider="{{ requirement.attributes }}" style="width: 90%; margin-top: 10px;" class="noUiSlider"></div>
-        <br>
+  <div class="row container">
+    <div ng-controller="requirements">
+      <div class="large-4 columns firstLevelRequirements" >
+        <div ng-repeat="requirement in requirements | filter: { level: 1 }">
+          <label class="right"><a ng-click="showSubcategory(requirement.name)">Details &raquo;</a></label>
+          <label style="margin-bottom: 5px;">{{ requirement.name | capitalize }}</label>
+          <span class="label secondary radius right requirementValue">-</span>
+          <div slider="{{ requirement.attributes }}" style="width: 90%; margin-top: 10px;" class="noUiSlider"></div>
+          <br>
+        </div>
       </div>
-    </div>
-    <div class="large-4 columns thirdLevelRequirements">
-      <form class="custom">
-        <select>
-        <option ng-repeat="requirement in requirements | filter: { level: 3 } | filter:filterCategory" value="{{ requirement.name }}">{{ requirement.name }}</option>
-        </select>
-      </form>
+      <div ng-repeat="requirement in requirements | filter: { level: 1 }">
+        <div class="thirdLevelRequirements" id="{{ requirement.name }}">
+          <p>{{ requirement.name | capitalize }}</p>
+          <div class="row collapse">
+            <div class="large-9 columns">
+              <form class="custom">
+              <select>
+                <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" value="{{ requirementThirdLevel.name }}">{{ requirementThirdLevel.name | capitalize }}</option>
+              </select>
+            </div>
+            <div class="large-3 columns">
+                <button class="button postfix">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="large-8 columns content">
       <h2>placeholder for the content</h2>
@@ -43,6 +55,7 @@
   <script src="lib/js/jquery.js"></script>
   <script src="lib/js/jquery.nouislider.js"></script>
   <script src="lib/js/angular.min.js"></script>
+  <script src="lib/js/foundation.min.js"></script>
   <script src="http://localhost:2480/js/orientdb-api.js"></script>
   <script src="src/js/main.js"></script>
 </body>

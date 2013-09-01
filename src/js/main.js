@@ -1,3 +1,5 @@
+
+// Initialize Angular
 var dssApp = angular.module('dssApp', []);
 
 // Globals
@@ -63,15 +65,27 @@ dssApp.filter('capitalize', function() {
 });
 
 // first Level Requirements controller
-dssApp.controller('firstLevelRequirements', function($scope, catchRequirementsFactory) {
+dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
   // $scope.requirementsFirstLevel = catchRequirementsFactory.getFirstLevelRequirements();
   $scope.filterCategory = {  };
 
   $scope.requirements = catchRequirementsFactory.getAll();
 
+  $scope.showSubcategory = function(categoryName) {
+    // Initialize foundation
+    $(document).foundation();
+
+    $(".thirdLevelRequirements").hide();
+    $("#" + categoryName).show();
+  }
+
+  // Initialize foundation
+  $(document).foundation();
 });
 
 // thirdLevelRequirements controller
 dssApp.controller('thirdLevelRequirements', function($scope, catchRequirementsFactory) {
   $scope.requirements = catchRequirementsFactory.getThirdLevelRequirements();
 });
+
+

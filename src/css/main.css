@@ -9,7 +9,8 @@ html, body {
 }
 
 .header {
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #acacac;
+  z-index: 999;
 }
 
 .logo {
@@ -22,12 +23,16 @@ html, body {
 
 .container {
   height: 100%;
+  position: relative;
 }
 
 .firstLevelRequirements {
-  border-right: 1px solid #dedede;
+  border-right: 1px solid #acacac;
   padding-top: 15px;
   height: 100%;
+  z-index: 900;
+  background: #fff;
+  width: 350px;
 }
 
 .firstLevelRequirements a:hover {
@@ -35,5 +40,21 @@ html, body {
 }
 
 .thirdLevelRequirements {
-  /* display: none; */
+  display: none;
+  z-index: 800;
+  background-color: rgba(0,0,0,.3);
+  width: 25%;
+  padding: 15px;
+  height: 85%;
+  position: absolute; top: 15px; left: 350px; 
+
+}
+
+.content {
+  box-shadow: 0 0 3px rgba(0,0,0,.3) inset;
+  height: 100%;
+  z-index: 600;
+  position: absolute;
+  width: 100%;
+  margin-left: 350px;
 }
