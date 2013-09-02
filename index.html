@@ -29,7 +29,7 @@
             </span>
           </label>
           <span class="label secondary radius right requirementValue">-</span>
-          <div render="{{ requirement.type }}" parameters="{{ requirement.attributes }}" style="width: 85%; margin-top: 10px;" class="noUiSlider"></div>
+          <div render="{{ requirement.type }}" parameters="{{ requirement.attributes }}" style="width: 80%; " class="noUiSlider"></div>
           <br>
         </div>
       </div>
@@ -40,9 +40,9 @@
           <div class="row collapse">
             <div class="large-9 columns">
               <select class="thirdLevelRequirementsSelect {{ requirement.name }}">
-                <optgroup title="test">
+                <optgroup label="Test Category">
                 <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" 
-                value="{{ requirementThirdLevel.name }}">
+                value="{{ requirementThirdLevel.name }}" title="{{ requirementThirdLevel.definition }}">
                 {{ requirementThirdLevel.name | capitalize }}
                 </option>
                 </optgroup>
@@ -54,7 +54,7 @@
           </div>
           <!-- start queries --> 
           <div ng-repeat="item in queryElements | filter: { level: 3 } | filter:requirement.name">
-            <div render="{{ item.type }}" parameters="{{ item.attributes }}">{{ item.name }}</div>
+            <div render="{{ item.type }}" parameters="{{ item.attributes }}" title="{{ item.definition }}">{{ item.name }}</div>
           </div>
           <!-- end queries -->
         </div>

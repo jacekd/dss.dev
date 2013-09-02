@@ -50,13 +50,12 @@ dssApp.directive('render', function() {
         })
         return {
           restrict: 'E',
-          link: element.html('<label for="' + element.text() + '">' + (element.text()).toUpperCase() + '</label><select name="' + element.text() + '">' + options + '</select>')
+          link: element.html('<label for="' + element.text() + '">' + element.text() + ' <span data-tooltip class="has-tip tip-top" title="' + scope.$eval(attrs.title) + '"><i class="fi-lightbulb"></i></span></label><select name="' + element.text() + '">' + options + '</select>')
         }
       } else if (renderValue === "input") {
         return {
           restrict: 'E',
-          template: '',
-          replace: true
+          link: element.html('<label for="' + element.text() + '">' + element.text() + '</label><input name="' + element.text() + '" type=' + attributes.type + ' class="large-12 columns">')
         }
       } else if (renderValue === "checkbox") {
         return {
@@ -64,10 +63,15 @@ dssApp.directive('render', function() {
           template: '',
           replace: true
         }
+      } else if (renderValue === "radio") {
+        return {
+          restrict: 'E',
+          link: element.html('<label for="' + element.text() + '">' + element.text() + '</label><div class="switch small"><input id="z" name="' + element.text() + '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + element.text() + '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>')
+        }
       } else {
         console.log('ouch');
       }
-
+      $(document).foundation();
     })
   }
 });

@@ -35,12 +35,12 @@ insert into requirements (name, level, definition, linkname, type, attributes) v
 ('security and Privacy', 1, 'This category includes attributes that indicate the effectiveness of a cloud service provider\u2019s controls on access to services, service data, and the physical facilities from which services are provided.','securityandprivacy', 'slider', 'range: [0,100], step: 10');
 
 Insert into Requirements (name, level, definition, linkName, type, attributes) values 
-('usability', 1, 'The ease with which a service can be used.','usability','slider', 'range: [0,100], step: 10');
+('usability', 1, 'The ease with which a service can be used.','usability','slider', 'range: [0,100], step: 10, start: 10');
 
 
 
 insert into Requirements (name, level, definition, linkName, type, attributes, category, subcategory) values 
-('monitoring service', 3, 'Description Missing', 'accountability.auditability.monitoringService', 'select', '0:none, 5:basic, 10:freely configurable monitoring system', 'accountability', 'auditability');
+('monitoring service', 3, 'Description Missing', 'accountability.auditability.monitoringService', 'select', "0:'none', 5:'basic', 10:'freely configurable monitoring system'", 'accountability', 'auditability');
 
 insert into Requirements (name, level, definition, linkName, type, attributes, category, subcategory) values 
 ('data location', 3, 'Description Missing', 'accountability.compliance.dataLocation', 'select', '0:unknown, 3:outside Europe/USA, 6:USA, 10:Europe', 'accountability', 'compliance');

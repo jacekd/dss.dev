@@ -60,8 +60,8 @@
 	}
 	.noUiSlider,
 	.noUiSlider.connect.lower a {
-		background: #ededed;
-		/* box-shadow: inset 0px 1px 7px #b6b4a8 */
+		/* background: #ededed; */
+		box-shadow: inset 0px 1px 7px #b6b4a8
 	}
 	.noUiSlider.disabled,
 	.noUiSlider.disabled.connect.lower a {
@@ -73,22 +73,23 @@
 		width: 18px;
 		border: 1px solid #99968f;
 		border-radius: 3px;
-		background: #efefe7;
+		/* background: #efefe7; */
+		background: #eaeaea;
 	}
 	.noUiSlider.disabled div {
 		background: transparent;
 	}
 	.noUiSlider.horizontal {
 		width: 300px;
-		height: 10px;
+		height: 18px;
 	}
 	.noUiSlider.horizontal div {
-		margin: -5px 0 0 -9px;
+		margin: -1px 0 0 -9px;
 	}
 	.noUiSlider.vertical {
 		width: 13px;
 		height: 300px;
 	}
 	.noUiSlider.vertical div {
-		margin: -9px 0 0 -5px;
+		margin: -1px 0 0 -5px;
 	}

@@ -12,6 +12,11 @@ select option {
   padding: 6px 11px;
 }
 
+label {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
 .row {
   width: 100% !important;
   max-width: 100%;
