@@ -44,13 +44,13 @@ dssApp.directive('render', function() {
             })
         }
       } else if (renderValue === "select") {
+        var options = '<option value="none">-- select --</option>';
+        angular.forEach(attributes, function(value, key) {
+          options = options + '<option value="' + key + '">' + value + '</option>';
+        })
         return {
           restrict: 'E',
-          scope: {
-            render: '='
-          },
-          template: "<h5>there will be select here</h5>",
-          replace: true
+          link: element.html('<label for="' + element.text() + '">' + (element.text()).toUpperCase() + '</label><select name="' + element.text() + '">' + options + '</select>')
         }
       } else if (renderValue === "input") {
         return {
@@ -64,9 +64,11 @@ dssApp.directive('render', function() {
           template: '',
           replace: true
         }
+      } else {
+        console.log('ouch');
       }
 
-    });
+    })
   }
 });
 

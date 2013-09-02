@@ -40,10 +40,12 @@
           <div class="row collapse">
             <div class="large-9 columns">
               <select class="thirdLevelRequirementsSelect {{ requirement.name }}">
+                <optgroup title="test">
                 <option ng-repeat="requirementThirdLevel in requirements | filter: { level: 3 } | filter:requirement.name" 
                 value="{{ requirementThirdLevel.name }}">
                 {{ requirementThirdLevel.name | capitalize }}
                 </option>
+                </optgroup>
               </select>
             </div>
             <div class="large-3 columns">
