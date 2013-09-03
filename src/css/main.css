@@ -17,6 +17,15 @@ label {
   text-transform: capitalize;
 }
 
+.deleteElement {
+  color: #c0392b;
+  cursor: pointer;
+}
+
+.deleteElement:hover {
+  text-decoration: underline;
+}
+
 .row {
   width: 100% !important;
   max-width: 100%;
