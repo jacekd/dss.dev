@@ -41,7 +41,7 @@ label {
 }
 
 .firstLevelRequirements {
-  border-right: 1px solid #acacac;
+  /* border-right: 1px solid #acacac; */
   padding-top: 15px;
   height: 100%;
   z-index: 900;
