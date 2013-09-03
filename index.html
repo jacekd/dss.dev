@@ -54,7 +54,7 @@
           </div>
           <!-- start queries --> 
           <div ng-repeat="item in queryElements | filter: { level: 3 } | filter:requirement.name">
-            <div render="{{ item.type }}" parameters="{{ item.attributes }}" title="{{ item.definition }}">{{ item.name }}</div>
+            <div render="{{ item.type }}" parameters="{{ item.attributes }}">{{ item.name }}</div>
           </div>
           <!-- end queries -->
         </div>

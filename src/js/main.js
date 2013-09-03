@@ -26,8 +26,7 @@ dssApp.factory('catchRequirementsFactory', function (){
 dssApp.directive('render', function() {
   return function (scope, element, attrs) {
     attrs.$observe('parameters', function(value) {
-      var attributes = scope.$eval("{" + attrs.parameters + "}"),
-          renderValue = attrs.render;
+      var attributes = scope.$eval("{" + attrs.parameters + "}"), renderValue = attrs.render;
       if (renderValue === "slider") {
         return {
           restrict: 'A',
@@ -49,12 +48,12 @@ dssApp.directive('render', function() {
         })
         return {
           restrict: 'E',
-          link: element.html('<label for="' + element.text() + '">' + element.text() + ' <span data-tooltip class="has-tip tip-top" title="' + scope.$eval(attrs.title) + '"><i class="fi-lightbulb"></i></span></label><select name="' + element.text() + '">' + options + '</select>')
+          link: element.html('<label for="' + element.text() + '">' + element.text() + ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '"><i class="fi-lightbulb"></i></span></label><select name="' + element.text() + '">' + options + '</select>')
         }
       } else if (renderValue === "input") {
         return {
           restrict: 'E',
-          link: element.html('<label for="' + element.text() + '">' + element.text() + '</label><input name="' + element.text() + '" type=' + attributes.type + ' class="large-12 columns">')
+          link: element.html('<label for="' + element.text() + '">' + element.text() + ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '"><i class="fi-lightbulb"></i></span></label><input name="' + element.text() + '" type=' + attributes.type + ' class="large-12 columns">')
         }
       } else if (renderValue === "checkbox") {
         return {
@@ -65,7 +64,7 @@ dssApp.directive('render', function() {
       } else if (renderValue === "radio") {
         return {
           restrict: 'E',
-          link: element.html('<label for="' + element.text() + '">' + element.text() + '</label><div class="switch small"><input id="z" name="' + element.text() + '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + element.text() + '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>')
+          link: element.html('<label for="' + element.text() + '">' + element.text() + ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '"><i class="fi-lightbulb"></i></span></label><div class="switch small"><input id="z" name="' + element.text() + '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + element.text() + '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>')
         }
       } else {
         console.log('ouch');
