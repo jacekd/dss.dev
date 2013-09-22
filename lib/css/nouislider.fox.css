@@ -61,7 +61,7 @@
 	.noUiSlider,
 	.noUiSlider.connect.lower a {
 		/* background: #ededed; */
-		box-shadow: inset 0px 1px 7px #b6b4a8
+		box-shadow: inset 0px 0px 3px #b6b4a8
 	}
 	.noUiSlider.disabled,
 	.noUiSlider.disabled.connect.lower a {
