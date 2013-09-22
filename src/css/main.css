@@ -55,7 +55,8 @@ label {
   height: 100%;
   z-index: 900;
   background: #fff;
-  width: 350px;b
+  width: 350px;
+  float: left;
 }
 
 .firstLevelRequirements a:hover {

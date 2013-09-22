@@ -23,21 +23,24 @@ dssApp.directive('render', ->
         )
         return {} =
           restrict: 'E'
-          link: element.html('<label for="' + element.text() + '">' + element.text() + 
+          replace: true
+          template: element.html('<label for="' + element.text() + '">' + element.text() + 
           ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
           '"><i class="fi-lightbulb"></i></span></label><select name="' + element.text() + 
           '">' + options + '</select>')
       else if renderValue is "input"
         return {} = 
           restrict: 'E'
-          link: element.html('<label for="' + element.text() + '">' + element.text() + 
+          replace: true
+          template: element.html('<label for="' + element.text() + '">' + element.text() + 
           ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
           '"><i class="fi-lightbulb"></i></span></label><input name="' + element.text() + 
-          '" type=' + attributes.type + ' class="large-12 columns">')
+          '" type=' + attributes.type + ' class="large-12 columns" ng-model="' + element.text() + '" ng-change="change()">')
       else if renderValue is "radio"
         return {} = 
           restrict: 'E'
-          link: element.html('<label for="' + element.text() + '">' + element.text() + 
+          replace: true
+          template: element.html('<label for="' + element.text() + '">' + element.text() + 
           ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
           '"><i class="fi-lightbulb"></i></span></label><div class="switch small"><input id="z" name="' + element.text() + 
           '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + element.text() + 
@@ -49,3 +52,28 @@ dssApp.directive('render', ->
       return
     )
 )
+
+dssApp.directive('reqInput', () ->
+  return {} = 
+    restrict: 'E'
+    replace: true
+    compile: (element, attrs) ->
+      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+      '"><i class="fi-lightbulb"></i></span></label><input name="' + attrs.linkname + '" type="text" class="large-12 columns query" 
+      ng-model="query.input" ng-change="change()" placeholder="">')
+)
+
+dssApp.directive('reqRadio', () ->
+  return {} =
+    restrict: 'E'
+    replace: true
+    compile: (element, attrs) ->
+      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+      '"><i class="fi-lightbulb"></i></span></label><div class="switch small
+      query" ng-click="change()"><input id="z" name="' + attrs.itemname + 
+      '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + attrs.itemname + 
+      '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>') 
+)
+

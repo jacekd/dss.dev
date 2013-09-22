@@ -20,11 +20,15 @@ dssApp.controller('requirements', ($scope, catchRequirementsFactory) ->
     angular.forEach($scope.requirements, (requirement) ->
       $scope.queryElements.push(requirement) if requirement.category is categoryName and requirement.name is requirementName and $scope.queryElements.indexOf(requirement) is -1
     )
-  
+
+  $scope.change = () ->
+    console.log "changed"
+
   # watch query items change, but it does not watch it's values
-  $scope.$watch('queryElements', (newValue, oldValue) ->
-    console.log newValue
-  , true)
+
+#  $scope.$watch('queryElements', (newValue, oldValue) ->
+#    console.log newValue
+#  , true)
 
 # Initialize foundation
 $(document).foundation()

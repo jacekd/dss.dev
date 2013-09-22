@@ -54,7 +54,17 @@
           </div>
           <!-- start queries --> 
           <div ng-repeat="item in queryElements | filter: { level: 3 } | filter:requirement.name">
-            <div render="{{ item.type }}" parameters="{{ item.attributes }}">{{ item.name }}</div>
+            <div ng-switch on="item.type">
+              <div ng-switch-when="input">
+                <req-input itemname="{{ item.name }}" definition="{{ item.definition }}" linkname="{{ item.linkName }}"></req-input>
+              </div>
+              <div ng-switch-when="radio">
+                <req-radio itemname="{{ item.name }}" definition="{{ item.definition }}" linkname="{{ item.linkName }}"></req-radio>
+              </div>
+              <div ng-switch-default>
+                <div render="{{ item.type }}" parameters="{{ item.attributes }}" ng-model="item.linkName" ng-change="change()">{{ item.name | replaceSpacesWithDash }}</div>
+              </div>
+            </div>
           </div>
           <!-- end queries -->
         </div>
@@ -68,7 +78,7 @@
 
   <script src="lib/js/jquery.js"></script>
   <script src="lib/js/jquery.nouislider.js"></script>
-  <script src="lib/js/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
   <script src="lib/js/foundation.min.js"></script>
   <script src="http://localhost:2480/js/orientdb-api.js"></script>
   <script src="src/js/main2.js"></script>
