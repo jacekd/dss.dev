@@ -49,10 +49,12 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
         when 'SELECT'
           console.log elementType
     )
-    console.log queryString
 
-    matchingServices = dataFactory.catchMatching(queryString)
-    console.log(matchingServices)
+    $scope.matchingServices = dataFactory.catchMatching(queryString)
+
+    # Debugging
+    console.log queryString
+    console.log($scope.matchingServices)
 
 
 

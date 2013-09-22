@@ -8,20 +8,6 @@
 
   csdDatabaseUrl = "http://localhost:2480/csd";
 
-  dssApp.factory('catchRequirementsFactory', function() {
-    var functionalDatabase, functionalDatabaseInfo, methods;
-    functionalDatabase = new ODatabase(functionalDatabaseUrl);
-    functionalDatabaseInfo = functionalDatabase.open('admin', 'admin');
-    methods = {};
-    methods.getAll = function() {
-      var query;
-      query = functionalDatabase.query('select from Requirements', 1000);
-      return query.result;
-    };
-    functionalDatabase.close();
-    return methods;
-  });
-
   dssApp.factory('dataFactory', function() {
     var csdDatabase, csdDatabaseInfo, methods;
     csdDatabase = new ODatabase(csdDatabaseUrl);
@@ -180,7 +166,7 @@
       });
     };
     return $scope.change = function() {
-      var matchingServices, queryString;
+      var queryString;
       queryString = "select from Services where 1=1";
       $(".query").each(function() {
         var element, elementInputs, elementName, elementType, elementValue, queryElement;
@@ -215,9 +201,9 @@
             return console.log(elementType);
         }
       });
+      $scope.matchingServices = dataFactory.catchMatching(queryString);
       console.log(queryString);
-      matchingServices = dataFactory.catchMatching(queryString);
-      return console.log(matchingServices);
+      return console.log($scope.matchingServices);
     };
   }, $(document).foundation());
 

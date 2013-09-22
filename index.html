@@ -69,7 +69,22 @@
       </div>
     </div>
     <div class="large-8 columns content">
-      <h2>placeholder for the content</h2>
+      <h4 ng-show="isEmpty(matchingServices)">No Services match to your requirements</h4>
+      <div ng-repeat="service in matchingServices" class="serviceBox fade">
+        <div class="row">
+          <div class="large-4 columns">
+            <img src="{{ service.logo_url }}" alt="{{ service.name }}">
+          </div>
+          <div class="large-8 columns">
+            {{ service.name }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <p><small>{{ service.description }}</small></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
