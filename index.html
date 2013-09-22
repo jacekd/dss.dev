@@ -60,6 +60,9 @@
             <div ng-switch-when="radio">
               <req-radio itemname="{{ item.name }}" definition="{{ item.definition }}" linkname="{{ item.linkName }}"></req-radio>
             </div>
+            <div ng-switch-when="select">
+              <req-select itemname="{{ item.name }}" definition="{{ item.definition }}" linkname="{{ item.linkName }}" parameters="{{ item.attributes }}"></req-select>
+            </div>
             <div ng-switch-default>
               <div render="{{ item.type }}" parameters="{{ item.attributes }}" ng-model="item.linkName" ng-change="change()">{{ item.name | replaceSpacesWithDash }}</div>
             </div>

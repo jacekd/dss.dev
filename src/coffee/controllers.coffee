@@ -28,6 +28,11 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
       elementType = element.get(0).tagName
       elementName = element.attr("name")
       switch elementType
+        when 'SELECT'
+          elementValue = element.val()
+          if elementValue isnt "none"
+            queryElement = " AND " + elementName + " = " + elementValue + ""
+            queryString = queryString + queryElement
         when 'INPUT'
           elementValue = element.val()
           if elementValue
@@ -46,7 +51,7 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
                 queryElement = " AND " + elementName + " = " + elementValue
                 queryString = queryString + queryElement
             )
-        when 'SELECT'
+        else
           console.log elementType
     )
 

@@ -8,6 +8,11 @@ dssApp.filter('replaceSpacesWithDash', ->
     input.replace /\ /g, "_"
 )
 
+dssApp.filter('replaceDotWithDash', ->
+  (input, scope) ->
+    input.replace /\./g, "_"
+)
+
 dssApp.filter('unique', ->
   (items, filterOn) ->
     return items if filterOn is false

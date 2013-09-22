@@ -77,3 +77,22 @@ dssApp.directive('reqRadio', () ->
       '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>') 
 )
 
+dssApp.directive('reqSelect', () ->
+  return {} =
+    restrict: 'E'
+    replace: true
+    link: (scope, element, attrs) ->
+      attributes = scope.$eval("{" + scope.item.attributes + "}")
+      options = '<option value="none">-- select --</option>'
+      angular.forEach(attributes, (value, key) ->
+        options = options + '<option value="' + key + '">' + value + '</option>'
+        return
+      )
+      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+      '"><i class="fi-lightbulb"></i></span></label><select name="' + attrs.linkname + 
+      '" class="query">' + options + '</select>')
+      element.bind('change', () ->
+        scope.change()
+      )
+)

@@ -38,6 +38,12 @@
     };
   });
 
+  dssApp.filter('replaceDotWithDash', function() {
+    return function(input, scope) {
+      return input.replace(/\./g, "_");
+    };
+  });
+
   dssApp.filter('unique', function() {
     return function(items, filterOn) {
       var extractValueToCompare, hashcheck, newItems;
@@ -145,6 +151,25 @@
     };
   });
 
+  dssApp.directive('reqSelect', function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      link: function(scope, element, attrs) {
+        var attributes, options;
+        attributes = scope.$eval("{" + scope.item.attributes + "}");
+        options = '<option value="none">-- select --</option>';
+        angular.forEach(attributes, function(value, key) {
+          options = options + '<option value="' + key + '">' + value + '</option>';
+        });
+        element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + '"><i class="fi-lightbulb"></i></span></label><select name="' + attrs.linkname + '" class="query">' + options + '</select>');
+        return element.bind('change', function() {
+          return scope.change();
+        });
+      }
+    };
+  });
+
   dssApp.controller('dssCtrl', function($scope, dataFactory) {
     $scope.queryElements = [];
     $scope.requirements = dataFactory.getAllRequirements();
@@ -174,6 +199,13 @@
         elementType = element.get(0).tagName;
         elementName = element.attr("name");
         switch (elementType) {
+          case 'SELECT':
+            elementValue = element.val();
+            if (elementValue !== "none") {
+              queryElement = " AND " + elementName + " = " + elementValue + "";
+              return queryString = queryString + queryElement;
+            }
+            break;
           case 'INPUT':
             elementValue = element.val();
             if (elementValue) {
@@ -197,7 +229,7 @@
               });
             }
             break;
-          case 'SELECT':
+          default:
             return console.log(elementType);
         }
       });
