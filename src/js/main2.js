@@ -175,7 +175,33 @@
       });
     };
     return $scope.change = function() {
-      return console.log("changed");
+      var queryString;
+      queryString = "";
+      return $(".query").each(function() {
+        var element, elementName, elementType, elementValue, queryElement;
+        element = $(this);
+        elementType = element.get(0).tagName;
+        switch (elementType) {
+          case 'INPUT':
+            elementValue = element.val();
+            elementName = element.attr("name");
+            if (elementValue) {
+              queryElement = "AND " + elementName + " = '" + elementValue + "'";
+              queryString = queryString + queryElement;
+              return console.log(queryElement);
+            }
+            break;
+          case 'DIV':
+            if (element.hasClass('noUiSlider')) {
+              return console.log("slider");
+            } else if (element.hasClass('switch')) {
+              return console.log("switch");
+            }
+            break;
+          case 'SELECT':
+            return console.log(elementType);
+        }
+      });
     };
   }, $(document).foundation());
 

@@ -22,7 +22,27 @@ dssApp.controller('requirements', ($scope, catchRequirementsFactory) ->
     )
 
   $scope.change = () ->
-    console.log "changed"
+    queryString = ""
+    $(".query").each(() ->
+      element = $(@)
+      elementType = element.get(0).tagName
+      switch elementType
+        when 'INPUT'
+          elementValue = element.val()
+          elementName = element.attr("name")
+          if (elementValue)
+            queryElement = "AND " + elementName + " = '" + elementValue + "'"
+            queryString = queryString + queryElement
+            console.log queryElement
+        when 'DIV'
+          ## check if it is slider or radio switch
+          if element.hasClass('noUiSlider')
+            console.log "slider"
+          else if element.hasClass('switch')
+            console.log "switch"
+        when 'SELECT'
+          console.log elementType
+    )
 
   # watch query items change, but it does not watch it's values
 
