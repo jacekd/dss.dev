@@ -71,9 +71,9 @@ dssApp.directive('reqRadio', () ->
     compile: (element, attrs) ->
       element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
       ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
-      '"><i class="fi-lightbulb"></i></span></label><div class="switch small
-      query" ng-click="change()"><input id="z" name="' + attrs.itemname + 
-      '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + attrs.itemname + 
+      '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius
+      query" ng-click="change()" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + 
+      '" type="radio" checked><label for="z" onclick="">NO</label><input id="1" name="' + attrs.itemname + 
       '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>') 
 )
 

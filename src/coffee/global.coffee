@@ -15,11 +15,14 @@ dssApp.factory('catchRequirementsFactory', ->
   methods
 )
 
-dssApp.factory('catchServices', ->
+dssApp.factory('dataFactory', ->
   csdDatabase = new ODatabase(csdDatabaseUrl)
   csdDatabaseInfo = csdDatabase.open('admin', 'admin')
 
   methods = {}
+  methods.getAllRequirements = ->
+    query = csdDatabase.query('select from Requirements', 1000)
+    query.result
   methods.catchMatching = (query) ->
     query = csdDatabase.query(query, 30) # catch first 30 matching services
     query.result

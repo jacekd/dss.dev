@@ -1,7 +1,7 @@
-dssApp.controller('requirements', ($scope, catchRequirementsFactory) ->
+dssApp.controller('dssCtrl', ($scope, dataFactory) ->
   $scope.queryElements = []
 
-  $scope.requirements = catchRequirementsFactory.getAll()
+  $scope.requirements = dataFactory.getAllRequirements()
 
   $scope.showSubcategory = (categoryName) ->
     # Init foundation
@@ -22,27 +22,40 @@ dssApp.controller('requirements', ($scope, catchRequirementsFactory) ->
     )
 
   $scope.change = () ->
-    queryString = ""
+    queryString = "select from Services where 1=1"
     $(".query").each(() ->
       element = $(@)
       elementType = element.get(0).tagName
+      elementName = element.attr("name")
       switch elementType
         when 'INPUT'
           elementValue = element.val()
-          elementName = element.attr("name")
-          if (elementValue)
-            queryElement = "AND " + elementName + " = '" + elementValue + "'"
+          if elementValue
+            queryElement = " AND " + elementName + " = '" + elementValue + "'"
             queryString = queryString + queryElement
-            console.log queryElement
         when 'DIV'
           ## check if it is slider or radio switch
           if element.hasClass('noUiSlider')
             console.log "slider"
           else if element.hasClass('switch')
-            console.log "switch"
+            elementInputs = element.find("input")
+            elementInputs.each(() ->
+              elementInput = $(@)
+              if elementInput.is(":checked")
+                elementValue = elementInput.attr("id")
+                queryElement = " AND " + elementName + " = " + elementValue
+                queryString = queryString + queryElement
+            )
         when 'SELECT'
           console.log elementType
     )
+    console.log queryString
+
+    matchingServices = dataFactory.catchMatching(queryString)
+    console.log(matchingServices)
+
+
+
 
   # watch query items change, but it does not watch it's values
 

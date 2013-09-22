@@ -22,11 +22,16 @@
     return methods;
   });
 
-  dssApp.factory('catchServices', function() {
+  dssApp.factory('dataFactory', function() {
     var csdDatabase, csdDatabaseInfo, methods;
     csdDatabase = new ODatabase(csdDatabaseUrl);
     csdDatabaseInfo = csdDatabase.open('admin', 'admin');
     methods = {};
+    methods.getAllRequirements = function() {
+      var query;
+      query = csdDatabase.query('select from Requirements', 1000);
+      return query.result;
+    };
     methods.catchMatching = function(query) {
       query = csdDatabase.query(query, 30);
       return query.result;
@@ -148,15 +153,15 @@
       restrict: 'E',
       replace: true,
       compile: function(element, attrs) {
-        return element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + '"><i class="fi-lightbulb"></i></span></label><div class="switch small\
-      query" ng-click="change()"><input id="z" name="' + attrs.itemname + '" type="radio" checked><label for="z" onclick="">NO</label><input id="z1" name="' + attrs.itemname + '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>');
+        return element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius\
+      query" ng-click="change()" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + '" type="radio" checked><label for="z" onclick="">NO</label><input id="1" name="' + attrs.itemname + '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>');
       }
     };
   });
 
-  dssApp.controller('requirements', function($scope, catchRequirementsFactory) {
+  dssApp.controller('dssCtrl', function($scope, dataFactory) {
     $scope.queryElements = [];
-    $scope.requirements = catchRequirementsFactory.getAll();
+    $scope.requirements = dataFactory.getAllRequirements();
     $scope.showSubcategory = function(categoryName) {
       $(document).foundation();
       $('.thirdLevelRequirements').hide();
@@ -175,33 +180,44 @@
       });
     };
     return $scope.change = function() {
-      var queryString;
-      queryString = "";
-      return $(".query").each(function() {
-        var element, elementName, elementType, elementValue, queryElement;
+      var matchingServices, queryString;
+      queryString = "select from Services where 1=1";
+      $(".query").each(function() {
+        var element, elementInputs, elementName, elementType, elementValue, queryElement;
         element = $(this);
         elementType = element.get(0).tagName;
+        elementName = element.attr("name");
         switch (elementType) {
           case 'INPUT':
             elementValue = element.val();
-            elementName = element.attr("name");
             if (elementValue) {
-              queryElement = "AND " + elementName + " = '" + elementValue + "'";
-              queryString = queryString + queryElement;
-              return console.log(queryElement);
+              queryElement = " AND " + elementName + " = '" + elementValue + "'";
+              return queryString = queryString + queryElement;
             }
             break;
           case 'DIV':
             if (element.hasClass('noUiSlider')) {
               return console.log("slider");
             } else if (element.hasClass('switch')) {
-              return console.log("switch");
+              elementInputs = element.find("input");
+              return elementInputs.each(function() {
+                var elementInput;
+                elementInput = $(this);
+                if (elementInput.is(":checked")) {
+                  elementValue = elementInput.attr("id");
+                  queryElement = " AND " + elementName + " = " + elementValue;
+                  return queryString = queryString + queryElement;
+                }
+              });
             }
             break;
           case 'SELECT':
             return console.log(elementType);
         }
       });
+      console.log(queryString);
+      matchingServices = dataFactory.catchMatching(queryString);
+      return console.log(matchingServices);
     };
   }, $(document).foundation());
 
