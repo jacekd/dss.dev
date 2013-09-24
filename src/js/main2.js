@@ -153,8 +153,8 @@
       link: function(scope, element, attrs) {
         var attributes;
         attributes = scope.$eval("{" + scope.item.attributes + "}");
-        element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius\
-      query" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + '" type="radio" checked><label for="z" onclick="">' + attributes[0] + '</label><input id="1" name="' + attrs.itemname + '" type="radio"><label for="z1" onclick="">' + attributes[1] + '</label><span></span></div>');
+        element.html('<label for="' + scope.item.name + '">' + scope.item.name + ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius\
+      query" name="' + scope.item.linkName + '"><input id="0" name="' + scope.item.name + '" type="radio" checked><label for="z" onclick="">' + attributes[0] + '</label><input id="1" name="' + scope.item.name + '" type="radio"><label for="z1" onclick="">' + attributes[1] + '</label><span></span></div>');
         return element.bind('click', function() {
           return scope.change();
         });
@@ -173,9 +173,38 @@
         angular.forEach(attributes, function(value, key) {
           options = options + '<option value="' + key + '">' + value + '</option>';
         });
-        element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + '"><i class="fi-lightbulb"></i></span></label><select name="' + attrs.linkname + '" class="query">' + options + '</select>');
+        element.html('<label for="' + scope.item.name + '">' + scope.item.name + ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '"><i class="fi-lightbulb"></i></span></label><select name="' + scope.item.linkName + '" class="query">' + options + '</select>');
         return element.bind('change', function() {
           return scope.change();
+        });
+      }
+    };
+  });
+
+  dssApp.directive('reqSlider', function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      link: function(scope, element, attrs) {
+        var attributes;
+        attributes = scope.$eval("{" + scope.item.attributes + "}");
+        element.html('\
+        <label style="margin-bottom: 5px;">' + scope.item.name + ' \
+          <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">\
+            <i class="fi-lightbulb"></i>\
+          </span>\
+        </label>\
+        <span class="label secondary radius right requirementValue">-</span>\
+        <div style="width: 80%; margin-bottom: 15px;" class="noUiSlider"></div>\
+      ');
+        return element.find("div.noUiSlider").noUiSlider({
+          range: attributes.range || [0, 100],
+          start: attributes.start || 0,
+          step: attributes.step || 1,
+          handles: attributes.handles || 1,
+          slide: function() {
+            return $(this).prev("span.requirementValue").text($(this).val());
+          }
         });
       }
     };

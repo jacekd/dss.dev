@@ -70,8 +70,8 @@ dssApp.directive('reqInput', () ->
     replace: true
     link: (scope, element, attrs) ->
       attributes = scope.$eval("{" + scope.item.attributes + "}")
-      placeholder = attributes.placeholder||""
-      type = attributes.type||"text"
+      placeholder = attributes.placeholder or ""
+      type = attributes.type or "text"
       element.html('<label for="' + scope.item.name + '">' + scope.item.name + 
       ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
       '"><i class="fi-lightbulb"></i></span></label><input name="' + scope.item.linkName + '" type="' + type + 
@@ -100,11 +100,11 @@ dssApp.directive('reqRadio', () ->
     replace: true
     link: (scope, element, attrs) ->
       attributes = scope.$eval("{" + scope.item.attributes + "}")
-      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
-      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+      element.html('<label for="' + scope.item.name + '">' + scope.item.name + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
       '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius
-      query" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + 
-      '" type="radio" checked><label for="z" onclick="">' + attributes[0] + '</label><input id="1" name="' + attrs.itemname + 
+      query" name="' + scope.item.linkName + '"><input id="0" name="' + scope.item.name + 
+      '" type="radio" checked><label for="z" onclick="">' + attributes[0] + '</label><input id="1" name="' + scope.item.name + 
       '" type="radio"><label for="z1" onclick="">' + attributes[1] + '</label><span></span></div>') 
       element.bind('click', () ->
         scope.change()
@@ -122,11 +122,36 @@ dssApp.directive('reqSelect', () ->
         options = options + '<option value="' + key + '">' + value + '</option>'
         return
       )
-      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
-      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
-      '"><i class="fi-lightbulb"></i></span></label><select name="' + attrs.linkname + 
+      element.html('<label for="' + scope.item.name + '">' + scope.item.name + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
+      '"><i class="fi-lightbulb"></i></span></label><select name="' + scope.item.linkName + 
       '" class="query">' + options + '</select>')
       element.bind('change', () ->
         scope.change()
       )
+)
+
+dssApp.directive('reqSlider', () -> 
+  return {} =
+    restrict: 'E'
+    replace: true
+    link: (scope, element, attrs) ->
+      attributes = scope.$eval("{" + scope.item.attributes + "}")
+      element.html('
+        <label style="margin-bottom: 5px;">' + scope.item.name + ' 
+          <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">
+            <i class="fi-lightbulb"></i>
+          </span>
+        </label>
+        <span class="label secondary radius right requirementValue">-</span>
+        <div style="width: 80%; margin-bottom: 15px;" class="noUiSlider"></div>
+      ')
+      element.find("div.noUiSlider").noUiSlider({
+          range: attributes.range or [0,100]
+          start: attributes.start or 0
+          step: attributes.step or 1
+          handles: attributes.handles or 1
+          slide: -> 
+            $(@).prev("span.requirementValue").text($(@).val())
+        })
 )
