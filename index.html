@@ -76,7 +76,7 @@
     </div>
     <div class="large-8 columns content">
       <h4 ng-hide="matchingServices.length" class="noresults">No Services match to your requirements</h4>
-      <div ng-repeat="service in matchingServices" class="serviceBox fade" ng-click="selected($index)" id="{{ $index }}">
+      <div ng-repeat="service in matchingServices" class="serviceBox fade" ng-click="selected($index)" id="service-{{ $index }}">
         <div class="row">
           <div class="large-4 columns">
             <img src="{{ service.logo_url }}" alt="{{ service.name }}">
@@ -100,6 +100,7 @@
   <script src="lib/js/angular.min.js"></script>
   <script src="lib/js/foundation.min.js"></script>
   <script src="http://localhost:2480/js/orientdb-api.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script> -->
   <script src="src/js/main2.js"></script>
 </body>
 </html>

@@ -64,7 +64,7 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
 
     # Service selected method
     $scope.selected = (serviceBoxId) ->
-      serviceBox = $("#" + serviceBoxId)
+      serviceBox = $("#service-" + serviceBoxId)
       serviceObject = $(@)
       serviceBox.toggleClass("selected")
 

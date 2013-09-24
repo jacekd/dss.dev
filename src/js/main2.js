@@ -291,7 +291,7 @@
       console.log($scope.matchingServices);
       return $scope.selected = function(serviceBoxId) {
         var serviceBox, serviceObject;
-        serviceBox = $("#" + serviceBoxId);
+        serviceBox = $("#service-" + serviceBoxId);
         serviceObject = $(this);
         serviceBox.toggleClass("selected");
         return $scope.selectedServices.push(serviceObject);
