@@ -1,6 +1,7 @@
 dssApp.controller('dssCtrl', ($scope, dataFactory) ->
   $scope.queryElements = []
-
+  $scope.selectedServices = []
+  $scope.selectedServicesEdges = []
   $scope.requirements = dataFactory.getAllRequirements()
 
   $scope.showSubcategory = (categoryName) ->
@@ -61,14 +62,32 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
     console.log queryString
     console.log($scope.matchingServices)
 
+    # Service selected method
+    $scope.selected = (serviceBoxId) ->
+      serviceBox = $("#" + serviceBoxId)
+      serviceObject = $(@)
+      serviceBox.toggleClass("selected")
 
-
+      # Push element to the selected for later
+      $scope.selectedServices.push(serviceObject)
 
   # watch query items change, but it does not watch it's values
 
 #  $scope.$watch('queryElements', (newValue, oldValue) ->
 #    console.log newValue
 #  , true)
+
+  # watch or changes in selected Serivices 
+  # execute only upon change
+  $scope.$watch('selectedServices', (value) ->
+    queryEdges = "select from Services where 1=1"
+    angular.forEach($scope.selectedServices, (selectedService) ->
+      # @rid rid for the connections of the services 
+    )
+
+    $scope.selectedServicesEdges = dataFactory.matchingServices(queryEdges) if ($scope.selectedServices.length)
+    # TODO: how to display it? 
+  )
 
 # Initialize foundation
 $(document).foundation()

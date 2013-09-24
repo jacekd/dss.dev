@@ -138,11 +138,9 @@ dssApp.directive('reqSlider', () ->
     link: (scope, element, attrs) ->
       attributes = scope.$eval("{" + scope.item.attributes + "}")
       element.html('
-        <label style="margin-bottom: 5px;">' + scope.item.name + ' 
-          <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">
-            <i class="fi-lightbulb"></i>
-          </span>
-        </label>
+        <label style="margin-bottom: 5px;">' + scope.item.name + 
+        '<span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">
+        <i class="fi-lightbulb"></i></span></label>
         <span class="label secondary radius right requirementValue">-</span>
         <div style="width: 80%; margin-bottom: 15px;" class="noUiSlider"></div>
       ')

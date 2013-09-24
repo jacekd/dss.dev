@@ -44,6 +44,18 @@
     };
   });
 
+  dssApp.filter('replaceDashWithSpace', function() {
+    return function(input, scope) {
+      return input.replace(/_/g, " ");
+    };
+  });
+
+  dssApp.filter('replaceDashWithDot', function() {
+    return function(input, scope) {
+      return input.replace(/_/g, ".");
+    };
+  });
+
   dssApp.filter('unique', function() {
     return function(items, filterOn) {
       var extractValueToCompare, hashcheck, newItems;
@@ -189,11 +201,8 @@
         var attributes;
         attributes = scope.$eval("{" + scope.item.attributes + "}");
         element.html('\
-        <label style="margin-bottom: 5px;">' + scope.item.name + ' \
-          <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">\
-            <i class="fi-lightbulb"></i>\
-          </span>\
-        </label>\
+        <label style="margin-bottom: 5px;">' + scope.item.name + '<span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + '">\
+        <i class="fi-lightbulb"></i></span></label>\
         <span class="label secondary radius right requirementValue">-</span>\
         <div style="width: 80%; margin-bottom: 15px;" class="noUiSlider"></div>\
       ');
@@ -212,6 +221,8 @@
 
   dssApp.controller('dssCtrl', function($scope, dataFactory) {
     $scope.queryElements = [];
+    $scope.selectedServices = [];
+    $scope.selectedServicesEdges = [];
     $scope.requirements = dataFactory.getAllRequirements();
     $scope.showSubcategory = function(categoryName) {
       $(document).foundation();
@@ -230,7 +241,7 @@
         }
       });
     };
-    return $scope.change = function() {
+    $scope.change = function() {
       var queryString;
       queryString = "select from Services where 1=1";
       $(".query").each(function() {
@@ -277,8 +288,23 @@
         $scope.matchingServices = dataFactory.catchMatching(queryString);
       }
       console.log(queryString);
-      return console.log($scope.matchingServices);
+      console.log($scope.matchingServices);
+      return $scope.selected = function(serviceBoxId) {
+        var serviceBox, serviceObject;
+        serviceBox = $("#" + serviceBoxId);
+        serviceObject = $(this);
+        serviceBox.toggleClass("selected");
+        return $scope.selectedServices.push(serviceObject);
+      };
     };
+    return $scope.$watch('selectedServices', function(value) {
+      var queryEdges;
+      queryEdges = "select from Services where 1=1";
+      angular.forEach($scope.selectedServices, function(selectedService) {});
+      if ($scope.selectedServices.length) {
+        return $scope.selectedServicesEdges = dataFactory.matchingServices(queryEdges);
+      }
+    });
   }, $(document).foundation());
 
 }).call(this);
