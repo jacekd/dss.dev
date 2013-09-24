@@ -273,7 +273,9 @@
             return console.log(elementType);
         }
       });
-      $scope.matchingServices = dataFactory.catchMatching(queryString);
+      if (queryString.search("AND") !== -1) {
+        $scope.matchingServices = dataFactory.catchMatching(queryString);
+      }
       console.log(queryString);
       return console.log($scope.matchingServices);
     };

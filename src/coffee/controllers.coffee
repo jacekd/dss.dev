@@ -55,7 +55,7 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
           console.log elementType
     )
 
-    $scope.matchingServices = dataFactory.catchMatching(queryString)
+    $scope.matchingServices = dataFactory.catchMatching(queryString) if (queryString.search("AND") isnt -1)
 
     # Debugging
     console.log queryString
