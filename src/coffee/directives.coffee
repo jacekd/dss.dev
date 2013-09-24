@@ -53,28 +53,62 @@ dssApp.directive('render', ->
     )
 )
 
+# dssApp.directive('reqInput', () ->
+#   return {} = 
+#     restrict: 'E'
+#     replace: true
+#     compile: (element, attrs) ->
+#       element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
+#       ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+#       '"><i class="fi-lightbulb"></i></span></label><input name="' + attrs.linkname + '" type="text" class="large-12 columns query" 
+#       ng-model="query.input" ng-change="change()" placeholder="">')
+# )
+
 dssApp.directive('reqInput', () ->
   return {} = 
     restrict: 'E'
     replace: true
-    compile: (element, attrs) ->
-      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
-      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
-      '"><i class="fi-lightbulb"></i></span></label><input name="' + attrs.linkname + '" type="text" class="large-12 columns query" 
-      ng-model="query.input" ng-change="change()" placeholder="">')
+    link: (scope, element, attrs) ->
+      attributes = scope.$eval("{" + scope.item.attributes + "}")
+      placeholder = attributes.placeholder||""
+      type = attributes.type||"text"
+      element.html('<label for="' + scope.item.name + '">' + scope.item.name + 
+      ' <span data-tooltip class="has-tip tip-top" title="' + scope.item.definition + 
+      '"><i class="fi-lightbulb"></i></span></label><input name="' + scope.item.linkName + '" type="' + type + 
+      '" class="large-12 columns query" placeholder="' + placeholder + '">')
+      element.bind('change', () ->
+        scope.change()
+      )
 )
+
+#dssApp.directive('reqRadio', () ->
+#  return {} =
+#    restrict: 'E'
+#    replace: true
+#    compile: (element, attrs) ->
+#      element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
+#      ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
+#      '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius
+#      query" ng-click="change()" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + 
+#      '" type="radio" checked><label for="z" onclick="">NO</label><input id="1" name="' + attrs.itemname + 
+#      '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>') 
+#)
 
 dssApp.directive('reqRadio', () ->
   return {} =
     restrict: 'E'
     replace: true
-    compile: (element, attrs) ->
+    link: (scope, element, attrs) ->
+      attributes = scope.$eval("{" + scope.item.attributes + "}")
       element.html('<label for="' + attrs.itemname + '">' + attrs.itemname + 
       ' <span data-tooltip class="has-tip tip-top" title="' + attrs.definition + 
       '"><i class="fi-lightbulb"></i></span></label><div class="switch small radius
-      query" ng-click="change()" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + 
-      '" type="radio" checked><label for="z" onclick="">NO</label><input id="1" name="' + attrs.itemname + 
-      '" type="radio"><label for="z1" onclick="">YES</label><span></span></div>') 
+      query" name="' + attrs.linkname + '"><input id="0" name="' + attrs.itemname + 
+      '" type="radio" checked><label for="z" onclick="">' + attributes[0] + '</label><input id="1" name="' + attrs.itemname + 
+      '" type="radio"><label for="z1" onclick="">' + attributes[1] + '</label><span></span></div>') 
+      element.bind('click', () ->
+        scope.change()
+      )
 )
 
 dssApp.directive('reqSelect', () ->
