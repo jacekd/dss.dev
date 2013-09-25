@@ -294,13 +294,15 @@
         serviceBox = $("#service-" + serviceBoxId);
         serviceObject = $(this);
         serviceBox.toggleClass("selected");
-        return $scope.selectedServices.push(serviceObject);
+        $scope.selectedServices.push(serviceObject);
+        return console.log($scope.selectedServices);
       };
     };
     return $scope.$watch('selectedServices', function(value) {
       var queryEdges;
       queryEdges = "select from Services where 1=1";
       angular.forEach($scope.selectedServices, function(selectedService) {});
+      console.log($scope.selectedServices);
       if ($scope.selectedServices.length) {
         return $scope.selectedServicesEdges = dataFactory.matchingServices(queryEdges);
       }

@@ -71,6 +71,8 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
       # Push element to the selected for later
       $scope.selectedServices.push(serviceObject)
 
+      console.log $scope.selectedServices
+
   # watch query items change, but it does not watch it's values
 
 #  $scope.$watch('queryElements', (newValue, oldValue) ->
@@ -84,7 +86,7 @@ dssApp.controller('dssCtrl', ($scope, dataFactory) ->
     angular.forEach($scope.selectedServices, (selectedService) ->
       # @rid rid for the connections of the services 
     )
-
+    console.log $scope.selectedServices
     $scope.selectedServicesEdges = dataFactory.matchingServices(queryEdges) if ($scope.selectedServices.length)
     # TODO: how to display it? 
   )
